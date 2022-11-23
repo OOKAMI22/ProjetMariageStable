@@ -180,13 +180,13 @@ def plotSatisf(resGS, meanA, meanB, labelA, labelB):
 meanEtu = meanSatisf(resGSEtu.get("satisfactionA"), resGSEtu.get("satisfactionB"))
 meanAEtu = meanEtu[0]
 meanBEtu = meanEtu[1]
-print("moyennes pref Etu" + str(meanAEtu))
-print("moyennes pref Etab" + str(meanBEtu))
+print("moyennes pref A" + str(meanAEtu))
+print("moyennes pref B" + str(meanBEtu))
 plotSatisf(resGSEtu, meanAEtu, meanBEtu, "Étudiants", "Établissements")
 
 meanEtab = meanSatisf(resGSEtab.get("satisfactionA"), resGSEtab.get("satisfactionB"))
 meanAEtab = meanEtab[0]
 meanBEtab = meanEtab[1]
-print("moyennes pref Etab" + str(meanAEtab))
-print("moyennes pref Etu" + str(meanBEtab))
+print("moyennes pref A" + str(meanAEtab))
+print("moyennes pref B" + str(meanBEtab))
 plotSatisf(resGSEtab, meanAEtab, meanBEtab, "Établissements", "Étudiants")

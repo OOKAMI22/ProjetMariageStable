@@ -10,7 +10,7 @@ widgets = {"logo": [],
            "etablissement": [],
            "preference": [],
            "preferences": [],
-           "couples":[],
+           "couples": [],
            "answer1": []}
 
 neededInformations = {"nbEtu": 0, "nbEtab": 0, "nbPref": 0, "preferences": []}
@@ -43,52 +43,60 @@ def affichage(preference):
 
     return res
 
-def calculerEns(x):
-  res = []
-  for i in range(x):
-    res.append(i)
-  return res
 
-def findPartner(couples,x):
+def calculerEns(x):
+    res = []
+    for i in range(x):
+        res.append(i)
+    return res
+
+
+def findPartner(couples, x):
     for couple in couples:
         if couple[1] == x:
             return couple[0]
     return None
-def betterChoice(choices,x,y):
-  for choice in choices :
-    if choice == x:
-      return x
-    if choice == y:
-      return y
-  return None
 
-def GS(A,B,Pref):
-  libreA = A
-  libreB = B
-  couple = []
-  while(libreA != []):
-    a = libreA[0]
-    b = Pref[0][a][0]
-    if b in libreB:
-      libreA.remove(a)
-      libreB.remove(b)
-      couple.append([a,b])
-    else:
-        partnerB = findPartner(couple,b)
-        if betterChoice(Pref[1][b],partnerB,a) == a:
+
+def betterChoice(choices, x, y):
+    for choice in choices:
+        if choice == x:
+            return x
+        if choice == y:
+            return y
+    return None
+
+
+def GS(A, B, Pref):
+    libreA = A
+    libreB = B
+    couple = []
+    while (libreA != []):
+        a = libreA[0]
+        b = Pref[0][a][0]
+        if b in libreB:
             libreA.remove(a)
-            libreA.append(partnerB)
-            couple.remove([partnerB,b])
-            couple.append([a,b])
+            libreB.remove(b)
+            couple.append([a, b])
         else:
-            Pref[0][a].remove(b)
-  return couple
+            partnerB = findPartner(couple, b)
+            if betterChoice(Pref[1][b], partnerB, a) == a:
+                libreA.remove(a)
+                libreA.append(partnerB)
+                couple.remove([partnerB, b])
+                couple.append([a, b])
+
+            else:
+                Pref[0][a].remove(b)
+    return couple
+
 
 def affichage_couples(couples):
-  res = "Les couples stables (etu,etab) calculés avec l'algorithme GS sont : \n"
-  for couple in couples:
-    res += str(couple)+"\n"
-  return res
+    res = "Les couples stables (etu,etab) calculés avec l'algorithme GS sont : \n"
+    for couple in couples:
+        res += str(couple) + "\n"
+    return res
+
 
 def create_buttons(name):
     button = QPushButton(name)
@@ -221,8 +229,8 @@ def formulaireFrame():
 
 def calcul():
     neededInformations["nbEtu"] = int(widgets["etudiant"][-1].text())
-    neededInformations["nbEtab"] = int(widgets["preference"][-1].text())
-    neededInformations["nbPref"] = int(widgets["etablissement"][-1].text())
+    neededInformations["nbEtab"] = int(widgets["etablissement"][-1].text())
+    neededInformations["nbPref"] = int(widgets["preference"][-1].text())
     neededInformations["preferences"] = random_preference(neededInformations["nbEtu"], neededInformations["nbEtab"],
                                                           neededInformations["nbPref"])
     print(neededInformations)
@@ -231,9 +239,9 @@ def calcul():
     pref.setAlignment(QtCore.Qt.AlignCenter)
     pref.setWordWrap(True)
     pref.setStyleSheet("font-family: Shanti;"
-                           "font-size: 25px;" +
-                           "color: 'white';" +
-                           "padding: 75px;")
+                       "font-size: 50px;" +
+                       "color: 'white';" +
+                       "padding: 75px;")
     widgets["preferences"].append(pref)
     grid.addWidget(widgets["preferences"][-1], 1, 0, 1, 0)
     button = create_buttons("calculer les couples stables")
@@ -241,7 +249,7 @@ def calcul():
     # button.setAlignment(QtCore.Qt.AlignCenter)
     widgets["answer1"].append(button)
     grid.addWidget(widgets["answer1"][-1], 3, 1)
-    #afficheCalculFrame()
+    # afficheCalculFrame()
 
 
 def GSFrame():
@@ -250,15 +258,15 @@ def GSFrame():
     B = calculerEns(neededInformations["nbEtab"])
     print(A)
     print(B)
-    couples = GS(A,B,neededInformations["preferences"])
+    couples = GS(A, B, neededInformations["preferences"])
     print(couples)
     CS = QLabel(affichage_couples(couples))
     CS.setAlignment(QtCore.Qt.AlignCenter)
     CS.setWordWrap(True)
     CS.setStyleSheet("font-family: Shanti;"
-                       "font-size: 25px;" +
-                       "color: 'white';" +
-                       "padding: 75px;")
+                     "font-size: 50px;" +
+                     "color: 'white';" +
+                     "padding: 75px;")
     widgets["couples"].append(CS)
     grid.addWidget(widgets["couples"][-1], 1, 0, 1, 0)
     button = create_buttons("relancer")
@@ -266,6 +274,7 @@ def GSFrame():
     # button.setAlignment(QtCore.Qt.AlignCenter)
     widgets["answer1"].append(button)
     grid.addWidget(widgets["answer1"][-1], 3, 1)
+
 
 
 acceuilFrame()
