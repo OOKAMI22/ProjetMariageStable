@@ -114,7 +114,7 @@ def GS(A, B, Pref):
             libreB.remove(b)
             couple.append([a, b])
             satisfactionA[a].append(satisfactionCalculatorA(PrefCopy[0][a], [a, b]))
-            satisfactionB[b].append(satisfactionCalculatorB(PrefCopy[0][a], [a, b]))
+            satisfactionB[b].append(satisfactionCalculatorB(PrefCopy[1][b], [a, b]))
             # print("Couple" + str(couple))
         else:
             partnerB = findPartner(couple, b)
@@ -145,7 +145,7 @@ dataset2 = [[[0, 1, 2], [0, 1, 2], [0, 1, 2]], [[2, 1, 0], [2, 1, 0], [2, 1, 0]]
 dataset3 = [[[0, 1, 2], [1, 2, 0], [2, 0, 1]], [[0, 1, 2], [0, 1, 2], [0, 1, 2]]]
 
 # Pref = random_preference(TAILLE, TAILLE, TAILLE)
-Pref = dataset3
+Pref = dataset2
 Pref2 = copyList(Pref)
 Pref2.reverse()
 print(Pref)
@@ -180,13 +180,13 @@ def plotSatisf(resGS, meanA, meanB, labelA, labelB):
 meanEtu = meanSatisf(resGSEtu.get("satisfactionA"), resGSEtu.get("satisfactionB"))
 meanAEtu = meanEtu[0]
 meanBEtu = meanEtu[1]
-print("moyennes pref A" + str(meanAEtu))
-print("moyennes pref B" + str(meanBEtu))
+print("moyennes pref Etu" + str(meanAEtu))
+print("moyennes pref Etab" + str(meanBEtu))
 plotSatisf(resGSEtu, meanAEtu, meanBEtu, "Étudiants", "Établissements")
 
 meanEtab = meanSatisf(resGSEtab.get("satisfactionA"), resGSEtab.get("satisfactionB"))
 meanAEtab = meanEtab[0]
 meanBEtab = meanEtab[1]
-print("moyennes pref A" + str(meanAEtab))
-print("moyennes pref B" + str(meanBEtab))
+print("moyennes pref Etab" + str(meanAEtab))
+print("moyennes pref Etu" + str(meanBEtab))
 plotSatisf(resGSEtab, meanAEtab, meanBEtab, "Établissements", "Étudiants")

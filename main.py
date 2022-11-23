@@ -114,7 +114,7 @@ def GS(A, B, Pref):
             libreB.remove(b)
             couple.append([a, b])
             satisfactionA[a].append(satisfactionCalculatorA(PrefCopy[0][a], [a, b]))
-            satisfactionB[b].append(satisfactionCalculatorB(PrefCopy[0][a], [a, b]))
+            satisfactionB[b].append(satisfactionCalculatorB(PrefCopy[1][b], [a, b]))
             # print("Couple" + str(couple))
         else:
             partnerB = findPartner(couple, b)
@@ -145,7 +145,7 @@ dataset2 = [[[0, 1, 2], [0, 1, 2], [0, 1, 2]], [[2, 1, 0], [2, 1, 0], [2, 1, 0]]
 dataset3 = [[[0, 1, 2], [1, 2, 0], [2, 0, 1]], [[0, 1, 2], [0, 1, 2], [0, 1, 2]]]
 
 # Pref = random_preference(TAILLE, TAILLE, TAILLE)
-Pref = dataset3
+Pref = dataset2
 Pref2 = copyList(Pref)
 Pref2.reverse()
 print(Pref)
